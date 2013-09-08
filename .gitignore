@@ -1,7 +1,7 @@
 target/
 
 # Eclipse / STS Crap
-.classpath/
-.project/
+.classpath
+.project
 .settings/
-.springBeans/
+.springBeans
