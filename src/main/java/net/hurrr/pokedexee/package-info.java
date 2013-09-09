@@ -1,0 +1,5 @@
+/**
+ * @author myao
+ * ENTERPRISE JAVA BEAN EE SPRING ENTERPRISE REST WIRING JERSEY XML SERVER PAGES ENTERPRISE
+ */
+package net.hurrr.pokedexee;
