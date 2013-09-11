@@ -3,9 +3,12 @@
  */
 package net.hurrr.pokedexee.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Java Bean representing entry of the pokedexes.pokemon table
  */
+@XmlRootElement
 public class Pokemon {
 	private int id;
 	private int order;

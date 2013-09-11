@@ -8,7 +8,7 @@ import java.util.Locale;
  */
 public enum Language {
 	JAPANESE(1, Locale.JAPANESE), 
-	JAPANESE_ROMANIZED(2, new Locale("ja", null, "roomaji")), 
+	JAPANESE_ROMANIZED(2, Locale.JAPANESE), 
 	KOREAN(3, Locale.KOREAN), 
 	CHINESE(4, Locale.CHINESE), // assume traditional because I'm pretty sure the franchise has not made it to the mainland (TW/HK only)
 	FRENCH(5, Locale.FRENCH), 
