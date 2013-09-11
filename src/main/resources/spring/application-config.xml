@@ -14,8 +14,8 @@
 			</list>
 		</property>
 	</bean>
-	
-	<import resource="beans.xml"/>
+		
 	<import resource="database.xml"/>
+	<import resource="beans.xml"/>
     
 </beans>

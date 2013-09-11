@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.hurrr.pokedexee.dao.PokemonMapper">
+	<select id="getPokemon" parameterType="int" resultType="net.hurrr.pokedexee.model.Pokemon">
+		SELECT 
+			p.id AS id,
+			p.height AS height,
+			p.weight AS weight,
+			p.base_experience AS baseExperience			
+		FROM pokemon p
+			  
+		WHERE p.id = #{id}
+	</select>
+</mapper>

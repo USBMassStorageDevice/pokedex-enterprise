@@ -4,6 +4,20 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		
+	<bean id="dataSource" class="org.sqlite.SQLiteDataSource">
+        <property name="url" value="${pokedexee.db.url}"/>
+        <property name="readOnly" value="${pokedexee.db.readOnly}"/>
+	</bean>
 	
-				
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:mybatis/*.xml" />
+	</bean>
+
+	<!-- MyBatis Spring Beans -->
+	<bean id="pokemonMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="net.hurrr.pokedexee.dao.PokemonMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>			
 </beans>

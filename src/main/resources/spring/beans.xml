@@ -5,7 +5,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
-	<context:component-scan base-package="net.hurrr.pokedexee.rest"/>
+	
+	<bean id="pokemonService" class="net.hurrr.pokedexee.services.PokemonServiceImpl">
+		<property name="pokemonMapper" ref="pokemonMapper"/>
+	</bean>
+	
+	<bean class="net.hurrr.pokedexee.rest.PokemonResource">
+    	<property name="pokemonService" ref="pokemonService"/>
+    </bean>
 
 </beans>
