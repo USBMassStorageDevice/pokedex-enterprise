@@ -1,5 +1,13 @@
 package net.hurrr.pokedexee.model;
 
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+@XmlRootElement
 public class Species {
 	private int id;
 	private int captureRate;
@@ -11,13 +19,12 @@ public class Species {
 	private boolean baby;
 	private boolean formsSwitchable;
 	
-	private Name speciesName;
-	private int evolvesFromId;
-	private int evolutionChainId;
+	private List<Text> names;
 	
 	// TODO COLOR, SHAPE and HABITAT
 	// TODO POKEDEX ORDER
 	
+	@XmlTransient
 	public int getId() {
 		return id;
 	}
@@ -57,6 +64,11 @@ public class Species {
 	public void setGeneration(Generation generation) {
 		this.generation = generation;
 	}
+	
+	// Convert to Enum
+	public void setGenerationId(int id) {
+		this.generation = Generation.getGenerationById(id);
+	}
 
 	public GrowthRate getGrowthRate() {
 		return growthRate;
@@ -64,6 +76,11 @@ public class Species {
 
 	public void setGrowthRate(GrowthRate growthRate) {
 		this.growthRate = growthRate;
+	}
+	
+	// Convert to Enum
+	public void setGrowthRateId(int id) {
+		this.growthRate = GrowthRate.getGrowthRateById(id);
 	}
 
 	public boolean isGenderDifferences() {
@@ -89,28 +106,14 @@ public class Species {
 	public void setFormsSwitchable(boolean formsSwitchable) {
 		this.formsSwitchable = formsSwitchable;
 	}
-
-	public Name getSpeciesName() {
-		return speciesName;
+	
+	@XmlElementWrapper(name="names")
+    @XmlElement(name="name")
+	public List<Text> getNames() {
+		return names;
 	}
 
-	public void setSpeciesName(Name speciesName) {
-		this.speciesName = speciesName;
-	}
-
-	public int getEvolvesFromId() {
-		return evolvesFromId;
-	}
-
-	public void setEvolvesFromId(int evolvesFromId) {
-		this.evolvesFromId = evolvesFromId;
-	}
-
-	public int getEvolutionChainId() {
-		return evolutionChainId;
-	}
-
-	public void setEvolutionChainId(int evolutionChainId) {
-		this.evolutionChainId = evolutionChainId;
+	public void setNames(List<Text> names) {
+		this.names = names;
 	}
 }

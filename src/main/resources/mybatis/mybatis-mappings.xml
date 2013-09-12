@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.hurrr.pokedexee.dao.PokemonMapper">
-	<select id="getPokemon" parameterType="int" resultType="net.hurrr.pokedexee.model.Pokemon">
+	<resultMap type="net.hurrr.pokedexee.model.Pokemon" id="pokemonResult">
+		<association property="species" javaType="net.hurrr.pokedexee.model.Species" column="speciesId" select="selectSpecies" columnPrefix="ps"/>			
+	</resultMap>
+	<resultMap type="net.hurrr.pokedexee.model.Species" id="speciesResult">
+		<collection property="names" ofType="net.hurrr.pokedexee.model.Text" column="id" select="selectSpeciesNames">
+		  	<result property="languageId" column="languageId"/>
+		  	<result property="text" column="text"/>
+  		</collection>
+	</resultMap>
+	<select id="selectPokemon" parameterType="int" resultType="net.hurrr.pokedexee.model.Pokemon" resultMap="pokemonResult">
 		SELECT 
 			p.id AS id,
+			p.'order' AS sortOrder, <!-- HACK: This is what happens when you use reserved keywords as column names -->
 			p.height AS height,
 			p.weight AS weight,
-			p.base_experience AS baseExperience			
-		FROM pokemon p
-			  
+			p.base_experience AS baseExperience,
+			p.species_id AS speciesId		
+		FROM pokemon p			  
 		WHERE p.id = #{id}
+	</select>
+	<select id="selectSpecies" parameterType="int" resultType="net.hurrr.pokedexee.model.Species" resultMap="speciesResult">
+		SELECT 
+			ps.id AS id,
+			ps.generation_id AS generationId,
+			ps.growth_rate_id AS growthRateId,
+			ps.capture_rate AS captureRate,	
+			ps.base_happiness AS baseHappiness,
+			ps.hatch_counter AS hatchCounter,
+			ps.has_gender_differences AS genderDifferences,	
+			ps.forms_switchable AS formsSwitchable
+		FROM pokemon_species ps
+		WHERE ps.id = #{id} 				
+	</select>	
+	<select id="selectSpeciesNames" parameterType="int" resultType="net.hurrr.pokedexee.model.Text">
+		SELECT
+			psn.local_language_id AS languageId,
+			psn.name AS text
+		FROM pokemon_species_names psn
+		WHERE psn.pokemon_species_id = #{id};
 	</select>
 </mapper>

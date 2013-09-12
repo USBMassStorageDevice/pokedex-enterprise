@@ -33,4 +33,13 @@ public enum Generation {
 	public Pokedex getCanonicalPokedex() {
 		return canonicalPokedex;
 	}	
+	
+	public static Generation getGenerationById(int id) {
+		for (Generation generation : Generation.values()) {
+			if (generation.getId() == id) {
+				return generation;
+			}
+		}		
+		return null;
+	}
 }

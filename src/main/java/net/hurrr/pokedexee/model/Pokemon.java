@@ -3,6 +3,7 @@
  */
 package net.hurrr.pokedexee.model;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -11,28 +12,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Pokemon {
 	private int id;
-	private int order;
+	private int sortOrder;
 	private int height;
 	private int weight;	
 	private int baseExperience;
 	private boolean isDefault;
-	
-	private Species species;
 
+	private Species species;
+	
+	@XmlAttribute
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}	
+	
+	@XmlAttribute
+	public int getSortOrder() {
+		return sortOrder;
 	}
 
-	public int getOrder() {
-		return order;
-	}
-
-	public void setOrder(int order) {
-		this.order = order;
+	public void setSortOrder(int sortOrder) {
+		this.sortOrder = sortOrder;
 	}
 
 	public int getHeight() {
@@ -58,7 +61,7 @@ public class Pokemon {
 	public void setBaseExperience(int baseExperience) {
 		this.baseExperience = baseExperience;
 	}
-
+	
 	public boolean isDefault() {
 		return isDefault;
 	}

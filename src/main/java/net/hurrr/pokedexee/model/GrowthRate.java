@@ -22,4 +22,13 @@ public enum GrowthRate {
 	public int getId() {
 		return id;
 	}
+	
+	public static GrowthRate getGrowthRateById(int id) {
+		for (GrowthRate growthRate : GrowthRate.values()){
+			if (growthRate.getId() == id) {
+				return growthRate;
+			}
+		}
+		return null;
+	}
 }
