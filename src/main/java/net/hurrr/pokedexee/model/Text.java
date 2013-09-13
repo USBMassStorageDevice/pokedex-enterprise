@@ -1,8 +1,9 @@
 package net.hurrr.pokedexee.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
  * A localized string. Uses our own Language enum since the Pokémon franchise is constrained to a few languages.
@@ -12,39 +13,14 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlRootElement
 public class Text {
 
-	private Language language;
-	private String text;
-	
-	@XmlAttribute
-	public Language getLanguage() {
-		return language;
+	private List<TextEntry> entries;
+
+    @XmlElement(name="text")
+	public List<TextEntry> getEntries() {
+		return entries;
 	}
-	
-	@XmlAttribute
-	public String getLocale() {
-		return language.getLanguage()+"";
+
+	public void setEntries(List<TextEntry> entries) {
+		this.entries = entries;
 	}
-	
-	@XmlAttribute
-	public String getAutoglossonym() {
-		return language.getAutoglossonym();
-	}
-	
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
-	
-	// Convert to Enum
-	public void setLanguageId(int id) {
-		this.language = Language.getLanguageById(id);
-	}
-	
-	@XmlValue
-	public String getText() {
-		return text;
-	}
-	
-	public void setText(String text) {
-		this.text = text;
-	}	
 }

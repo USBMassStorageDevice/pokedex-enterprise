@@ -4,6 +4,7 @@ package net.hurrr.pokedexee.model;
  * Backed by the pokedexes.pokedexes table
  */
 public enum Pokedex {
+	NULL(0, null),
 	NATIONAL(1, null),
 	KANTO(2, Region.KANTO),
 	JOHTO(3, Region.JOHTO),

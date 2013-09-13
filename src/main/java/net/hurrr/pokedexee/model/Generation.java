@@ -6,6 +6,7 @@ package net.hurrr.pokedexee.model;
  *
  */
 public enum Generation {
+	NULL(0, null, null),
 	GENERATION_I(1, Region.KANTO, Pokedex.KANTO),
 	GENERATION_II(2, Region.JOHTO, Pokedex.JOHTO_UPDATED),
 	GENERATION_III(3, Region.HOENN, Pokedex.HOENN),
@@ -33,13 +34,4 @@ public enum Generation {
 	public Pokedex getCanonicalPokedex() {
 		return canonicalPokedex;
 	}	
-	
-	public static Generation getGenerationById(int id) {
-		for (Generation generation : Generation.values()) {
-			if (generation.getId() == id) {
-				return generation;
-			}
-		}		
-		return null;
-	}
 }

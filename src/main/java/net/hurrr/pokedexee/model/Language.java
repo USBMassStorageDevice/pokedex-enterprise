@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlEnum;
  */
 @XmlEnum
 public enum Language {
+	NULL(0, null, null),
 	JAPANESE(1, Locale.JAPANESE, "日本語"), 
 	JAPANESE_ROMANIZED(2, Locale.JAPANESE, "nihongo"), 
 	KOREAN(3, Locale.KOREAN, "한국어"), 

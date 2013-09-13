@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.hurrr.pokedexee.dao.PokemonMapper">
+	<resultMap type="net.hurrr.pokedexee.model.Text" id="textResult">
+		<collection property="entries" ofType="net.hurrr.pokedexee.model.TextEntry" column="id">
+			<result property="language" column="languageId"/>
+			<result property="string" column="text"/>
+		</collection>		
+	</resultMap>
 	<resultMap type="net.hurrr.pokedexee.model.Pokemon" id="pokemonResult">
 		<association property="species" javaType="net.hurrr.pokedexee.model.Species" column="speciesId" select="selectSpecies" columnPrefix="ps"/>			
 	</resultMap>
-	<resultMap type="net.hurrr.pokedexee.model.Species" id="speciesResult">
-		<collection property="names" ofType="net.hurrr.pokedexee.model.Text" column="id" select="selectSpeciesNames">
-		  	<result property="languageId" column="languageId"/>
-		  	<result property="text" column="text"/>
-  		</collection>
+	<resultMap type="net.hurrr.pokedexee.model.Species" id="speciesResult">	
+		<association property="names" javaType="net.hurrr.pokedexee.model.Text" column="id" select="selectSpeciesNames"/>  		
 	</resultMap>
+		
 	<select id="selectPokemon" parameterType="int" resultType="net.hurrr.pokedexee.model.Pokemon" resultMap="pokemonResult">
 		SELECT 
 			p.id AS id,
-			p.'order' AS sortOrder, <!-- HACK: This is what happens when you use reserved keywords as column names -->
+			p.'order' AS sortOrder, <!-- WRONG AND DANGER: using reserved keywords as column names -->
 			p.height AS height,
 			p.weight AS weight,
 			p.base_experience AS baseExperience,
@@ -30,11 +34,14 @@
 			ps.base_happiness AS baseHappiness,
 			ps.hatch_counter AS hatchCounter,
 			ps.has_gender_differences AS genderDifferences,	
-			ps.forms_switchable AS formsSwitchable
+			ps.forms_switchable AS formsSwitchable,
+			ps.shape_id AS shape,
+			ps.habitat_id AS habitat,
+			ps.color_id AS color
 		FROM pokemon_species ps
 		WHERE ps.id = #{id} 				
 	</select>	
-	<select id="selectSpeciesNames" parameterType="int" resultType="net.hurrr.pokedexee.model.Text">
+	<select id="selectSpeciesNames" parameterType="int" resultType="net.hurrr.pokedexee.model.Text" resultMap="textResult">
 		SELECT
 			psn.local_language_id AS languageId,
 			psn.name AS text

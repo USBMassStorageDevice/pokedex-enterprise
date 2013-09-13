@@ -1,15 +1,12 @@
 package net.hurrr.pokedexee.model;
 
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class Species {
 	private int id;
+	private int sortOrder;
 	private int captureRate;
 	private int baseHappiness;
 	private int hatchCounter;
@@ -19,18 +16,29 @@ public class Species {
 	private boolean baby;
 	private boolean formsSwitchable;
 	
-	private List<Text> names;
+	private Text names;
 	
-	// TODO COLOR, SHAPE and HABITAT
+	private Shape shape;
+	private Habitat habitat;
+	private Color color;
 	// TODO POKEDEX ORDER
 	
-	@XmlTransient
+	@XmlAttribute
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}	
+	
+	@XmlAttribute
+	public int getSortOrder() {
+		return sortOrder;
+	}
+
+	public void setSortOrder(int sortOrder) {
+		this.sortOrder = sortOrder;
 	}
 
 	public int getCaptureRate() {
@@ -64,11 +72,6 @@ public class Species {
 	public void setGeneration(Generation generation) {
 		this.generation = generation;
 	}
-	
-	// Convert to Enum
-	public void setGenerationId(int id) {
-		this.generation = Generation.getGenerationById(id);
-	}
 
 	public GrowthRate getGrowthRate() {
 		return growthRate;
@@ -78,11 +81,6 @@ public class Species {
 		this.growthRate = growthRate;
 	}
 	
-	// Convert to Enum
-	public void setGrowthRateId(int id) {
-		this.growthRate = GrowthRate.getGrowthRateById(id);
-	}
-
 	public boolean isGenderDifferences() {
 		return genderDifferences;
 	}
@@ -107,13 +105,35 @@ public class Species {
 		this.formsSwitchable = formsSwitchable;
 	}
 	
-	@XmlElementWrapper(name="names")
-    @XmlElement(name="name")
-	public List<Text> getNames() {
+	public Text getNames() {
 		return names;
 	}
 
-	public void setNames(List<Text> names) {
+	public void setNames(Text names) {
 		this.names = names;
 	}
+
+	public Shape getShape() {
+		return shape;
+	}
+
+	public void setShape(Shape shape) {
+		this.shape = shape;
+	}
+
+	public Habitat getHabitat() {
+		return habitat;
+	}
+
+	public void setHabitat(Habitat habitat) {
+		this.habitat = habitat;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}	
 }

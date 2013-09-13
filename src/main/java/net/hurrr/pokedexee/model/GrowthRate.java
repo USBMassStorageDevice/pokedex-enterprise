@@ -6,6 +6,7 @@ package net.hurrr.pokedexee.model;
  *
  */
 public enum GrowthRate {
+	NULL(0),
 	SLOW(1),
 	MEDIUM(2),
 	FAST(3),
@@ -21,14 +22,5 @@ public enum GrowthRate {
 	
 	public int getId() {
 		return id;
-	}
-	
-	public static GrowthRate getGrowthRateById(int id) {
-		for (GrowthRate growthRate : GrowthRate.values()){
-			if (growthRate.getId() == id) {
-				return growthRate;
-			}
-		}
-		return null;
 	}
 }
