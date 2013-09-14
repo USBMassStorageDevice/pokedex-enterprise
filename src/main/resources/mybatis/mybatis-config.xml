@@ -2,15 +2,23 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+	<typeAliases>
+		<!-- Everything that is not an Enum goes here -->
+		<typeAlias type="net.hurrr.pokedexee.model.Pokemon" alias="Pokemon"/>
+		<typeAlias type="net.hurrr.pokedexee.model.Species" alias="Species"/>
+		<typeAlias type="net.hurrr.pokedexee.model.Text" alias="Text"/>
+		<typeAlias type="net.hurrr.pokedexee.model.TextEntry" alias="TextEntry"/>
+	</typeAliases>
 	<typeHandlers>
-		<!-- Pretty much every Enum we have should go in here -->
+		<!-- ... and every Enum we have should go in here -->
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Color"/>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.GameVersion"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Generation"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.GrowthRate"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Habitat"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Language"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Pokedex"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Region"/>
-		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Shape"/>
-	</typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Shape"/>		
+	</typeHandlers>	
 </configuration>

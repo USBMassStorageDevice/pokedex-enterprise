@@ -2,6 +2,7 @@ package net.hurrr.pokedexee.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class Species {
@@ -21,9 +22,8 @@ public class Species {
 	private Shape shape;
 	private Habitat habitat;
 	private Color color;
-	// TODO POKEDEX ORDER
 	
-	@XmlAttribute
+	@XmlTransient // Database ID
 	public int getId() {
 		return id;
 	}

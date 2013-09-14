@@ -6,25 +6,19 @@ package net.hurrr.pokedexee.model;
  *
  */
 public enum Generation {
-	NULL(0, null, null),
-	GENERATION_I(1, Region.KANTO, Pokedex.KANTO),
-	GENERATION_II(2, Region.JOHTO, Pokedex.JOHTO_UPDATED),
-	GENERATION_III(3, Region.HOENN, Pokedex.HOENN),
-	GENERATION_IV(4, Region.SINNOH, Pokedex.SINNOH_EXTENDED),
-	GENERATION_V(5, Region.UNOVA, Pokedex.UNOVA);
+	NULL(null, null),
+	GENERATION_I(Region.KANTO, Pokedex.KANTO),
+	GENERATION_II(Region.JOHTO, Pokedex.JOHTO_UPDATED),
+	GENERATION_III(Region.HOENN, Pokedex.HOENN),
+	GENERATION_IV(Region.SINNOH, Pokedex.SINNOH_EXTENDED),
+	GENERATION_V(Region.UNOVA, Pokedex.UNOVA);
 	
-	private final int id;
 	private final Region region;
 	private final Pokedex canonicalPokedex;
 	
-	Generation(int id, Region region, Pokedex canonicalPokedex) {
-		this.id = id;
+	Generation(Region region, Pokedex canonicalPokedex) {
 		this.region = region;
 		this.canonicalPokedex = canonicalPokedex;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public Region getRegion() {

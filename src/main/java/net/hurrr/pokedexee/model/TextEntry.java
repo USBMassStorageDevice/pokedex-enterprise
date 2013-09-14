@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
- * I didn't really feel like making a custom JAXB map handler, so this custom key-value pair will have to do.
+ * A localized string. Uses our own Language enum since the Pokémon franchise is constrained to a few languages.
+ * Pretty-print logic for that Language enum is also in here.
  * @author myao
  */
 @XmlRootElement

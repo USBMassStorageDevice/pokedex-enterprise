@@ -5,9 +5,12 @@ package net.hurrr.pokedexee.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Java Bean representing entry of the pokedexes.pokemon table
+ * Java Bean representing entry of the pokedexes.pokemon table. From what I have gathered, a
+ * Pokémon has a bunch of variable stuff (i.e. height and weight can vary between the unique
+ * Pokémon of the same species) and all of the consistent stuff is in Species.
  */
 @XmlRootElement
 public class Pokemon {
@@ -20,7 +23,7 @@ public class Pokemon {
 
 	private Species species;
 	
-	@XmlAttribute
+	@XmlTransient // Database ID
 	public int getId() {
 		return id;
 	}

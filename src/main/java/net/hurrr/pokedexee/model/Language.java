@@ -10,34 +10,24 @@ import javax.xml.bind.annotation.XmlEnum;
  */
 @XmlEnum
 public enum Language {
-	NULL(0, null, null),
-	JAPANESE(1, Locale.JAPANESE, "日本語"), 
-	JAPANESE_ROMANIZED(2, Locale.JAPANESE, "nihongo"), 
-	KOREAN(3, Locale.KOREAN, "한국어"), 
-	CHINESE(4, Locale.CHINESE, "中文"), // assume traditional because I'm pretty sure the franchise has not made it to the mainland (TW/HK only)
-	FRENCH(5, Locale.FRENCH, "français"), 
-	GERMAN(6, Locale.GERMAN, "Deutsch"), 
-	SPANISH(7, new Locale("es"), "español"), 
-	ITALIAN(8, new Locale("it"), "italiano"), 
-	ENGLISH(9, Locale.ENGLISH, "English"), 
-	CZECH(10, new Locale("cs"), "čeština"); // not an official supported language, but it's in the database
+	NULL(null, null),
+	JAPANESE(Locale.JAPANESE, "日本語"), 
+	JAPANESE_ROMANIZED(Locale.JAPANESE, "nihongo"), 
+	KOREAN(Locale.KOREAN, "한국어"), 
+	CHINESE(Locale.CHINESE, "中文"), // assume traditional because I'm pretty sure the franchise has not made it to the mainland (TW/HK only)
+	FRENCH(Locale.FRENCH, "français"), 
+	GERMAN(Locale.GERMAN, "deutsch"), 
+	SPANISH(new Locale("es"), "español"), 
+	ITALIAN(new Locale("it"), "italiano"), 
+	ENGLISH(Locale.ENGLISH, "english"), 
+	CZECH(new Locale("cs"), "čeština"); // not an official supported language, but it's in the database
 
-	private final int id;
 	private final Locale language;
 	private final String autoglossonym;
 		
-	Language(int id, Locale language, String autoglossonym) {
-		this.id = id;
+	Language(Locale language, String autoglossonym) {
 		this.language = language;
 		this.autoglossonym = autoglossonym;
-	}
-	
-	/**
-	 * Database ID
-	 * @return the database ID
-	 */
-	public int getId() {
-		return id;
 	}
 	
 	/**
@@ -54,14 +44,5 @@ public enum Language {
 	 */
 	public String getAutoglossonym() {
 		return autoglossonym;
-	}
-	
-	public static Language getLanguageById(int id) {
-		for (Language language : Language.values()) {
-			if (language.getId() == id) {
-				return language;
-			}
-		}
-		return null;
 	}
 }

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.hurrr.pokedexee.dao.PokemonMapper">
-	<resultMap type="net.hurrr.pokedexee.model.Text" id="textResult">
-		<collection property="entries" ofType="net.hurrr.pokedexee.model.TextEntry" column="id">
+<mapper namespace="net.hurrr.pokedexee.dao.PokemonMapper">	
+	<resultMap type="Pokemon" id="pokemonResult">
+		<association property="species" javaType="Species" column="speciesId" select="selectSpecies" columnPrefix="ps"/>			
+	</resultMap>
+	<resultMap type="Species" id="speciesResult">	
+		<association property="names" javaType="Text" column="id" select="selectSpeciesNames"/>
+	</resultMap>
+	<resultMap type="Text" id="textResult">
+		<collection property="entries" ofType="TextEntry" column="id">
 			<result property="language" column="languageId"/>
 			<result property="string" column="text"/>
 		</collection>		
-	</resultMap>
-	<resultMap type="net.hurrr.pokedexee.model.Pokemon" id="pokemonResult">
-		<association property="species" javaType="net.hurrr.pokedexee.model.Species" column="speciesId" select="selectSpecies" columnPrefix="ps"/>			
-	</resultMap>
-	<resultMap type="net.hurrr.pokedexee.model.Species" id="speciesResult">	
-		<association property="names" javaType="net.hurrr.pokedexee.model.Text" column="id" select="selectSpeciesNames"/>  		
-	</resultMap>
-		
-	<select id="selectPokemon" parameterType="int" resultType="net.hurrr.pokedexee.model.Pokemon" resultMap="pokemonResult">
+	</resultMap>	
+			
+	<select id="selectPokemon" parameterType="int" resultType="Pokemon" resultMap="pokemonResult">
 		SELECT 
 			p.id AS id,
 			p.'order' AS sortOrder, <!-- WRONG AND DANGER: using reserved keywords as column names -->
@@ -25,9 +25,10 @@
 		FROM pokemon p			  
 		WHERE p.id = #{id}
 	</select>
-	<select id="selectSpecies" parameterType="int" resultType="net.hurrr.pokedexee.model.Species" resultMap="speciesResult">
+	<select id="selectSpecies" parameterType="int" resultType="Species" resultMap="speciesResult">
 		SELECT 
 			ps.id AS id,
+			ps.'order' AS sortOrder,
 			ps.generation_id AS generationId,
 			ps.growth_rate_id AS growthRateId,
 			ps.capture_rate AS captureRate,	
@@ -41,11 +42,19 @@
 		FROM pokemon_species ps
 		WHERE ps.id = #{id} 				
 	</select>	
-	<select id="selectSpeciesNames" parameterType="int" resultType="net.hurrr.pokedexee.model.Text" resultMap="textResult">
+	<select id="selectSpeciesNames" parameterType="int" resultType="Text" resultMap="textResult">
 		SELECT
 			psn.local_language_id AS languageId,
 			psn.name AS text
 		FROM pokemon_species_names psn
 		WHERE psn.pokemon_species_id = #{id};
+	</select>
+	<select id="selectPokedexFlavorText" parameterType="int" resultType="Text" resultMap="textResult">
+		SELECT
+			psft.language_id AS languageId,
+			psft.flavor_text AS text
+		FROM pokemon_species_flavor_text psft
+		WHERE psft.species_id = #{sid}
+			AND psft.version_id = #{vid}  
 	</select>
 </mapper>

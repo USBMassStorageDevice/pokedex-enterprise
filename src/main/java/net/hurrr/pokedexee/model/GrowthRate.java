@@ -6,21 +6,11 @@ package net.hurrr.pokedexee.model;
  *
  */
 public enum GrowthRate {
-	NULL(0),
-	SLOW(1),
-	MEDIUM(2),
-	FAST(3),
-	MEDIUM_SLOW(4),
-	SLOW_THEN_VERY_FAST(5),
-	FAST_THEN_VERY_SLOW(6);
-	
-	private int id;
-	
-	GrowthRate(int id) {
-		this.id = id;
-	}	
-	
-	public int getId() {
-		return id;
-	}
+	NULL,
+	SLOW,
+	MEDIUM,
+	FAST,
+	MEDIUM_SLOW,
+	SLOW_THEN_VERY_FAST,
+	FAST_THEN_VERY_SLOW;
 }

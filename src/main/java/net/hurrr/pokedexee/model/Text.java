@@ -6,8 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * A localized string. Uses our own Language enum since the Pokémon franchise is constrained to a few languages.
- * Pretty-print logic for that Language enum is shoved in here.
+ * Localized strings.
  * @author myao
  */
 @XmlRootElement

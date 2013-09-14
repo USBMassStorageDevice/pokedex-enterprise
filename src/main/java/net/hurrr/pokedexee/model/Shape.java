@@ -6,29 +6,29 @@ package net.hurrr.pokedexee.model;
  * @author myao
  */
 public enum Shape {
-	NULL(0),
-	POMACEOUS(1),
-	CAUDAL(2),
-	ICHTHYIC(3),
-	BRACHIAL(4),
-	ALVINE(5),
-	SCIURINE(6),
-	CRURAL(7),
-	MENSAL(8),
-	ALAR(9),
-	CILIAL(10),
-	POLYCEPHALIC(11),
-	ANTHROPOMORPHIC(12),
-	LEPIDOPTEROUS(13),
-	CHITINOUS(14);
+	NULL(null),
+	POMACEOUS("ball"),
+	CAUDAL("squiggle"),
+	ICHTHYIC("fish"),
+	BRACHIAL("arms"),
+	ALVINE("blob"),
+	SCIURINE("upright"),
+	CRURAL("legs"),
+	MENSAL("quadruped"),
+	ALAR("wings"),
+	CILIAL("tentacles"),
+	POLYCEPHALIC("heads"),
+	ANTHROPOMORPHIC("humanoid"),
+	LEPIDOPTEROUS("bug-wings"),
+	CHITINOUS("armor");
 	
-	private int id;
+	private String simpleName;
 	
-	Shape(int id) {
-		this.id = id;
-	}
+	Shape(String simpleName) {
+		this.simpleName = simpleName;
+	}	
 	
-	public int getId() {
-		return id;
+	public String getSimpleName() {
+		return simpleName;
 	}
 }
