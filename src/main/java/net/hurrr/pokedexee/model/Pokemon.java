@@ -3,7 +3,12 @@
  */
 package net.hurrr.pokedexee.model;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -22,6 +27,7 @@ public class Pokemon {
 	private boolean isDefault;
 
 	private Species species;
+	private List<PokedexEntry> pokedexEntries;
 	
 	@XmlTransient // Database ID
 	public int getId() {
@@ -79,5 +85,15 @@ public class Pokemon {
 
 	public void setSpecies(Species species) {
 		this.species = species;
+	}
+
+	@XmlElementWrapper(name = "pokedex")
+	@XmlElement(name = "entry")
+	public List<PokedexEntry> getPokedexEntries() {
+		return pokedexEntries;
+	}
+
+	public void setPokedexEntries(List<PokedexEntry> pokedexEntries) {
+		this.pokedexEntries = pokedexEntries;
 	}
 }

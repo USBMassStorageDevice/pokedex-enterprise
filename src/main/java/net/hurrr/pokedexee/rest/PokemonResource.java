@@ -1,13 +1,15 @@
 package net.hurrr.pokedexee.rest;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import net.hurrr.pokedexee.model.PokedexEntry;
 import net.hurrr.pokedexee.model.Pokemon;
-import net.hurrr.pokedexee.model.Species;
 import net.hurrr.pokedexee.services.PokemonService;
 
 @Path("pokemon")
@@ -34,8 +36,8 @@ public class PokemonResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	@Path("/species/{id}")
-	public Species getSpecies(@PathParam("id") int id) {
-		return pokemonService.getSpecies(id);
+	@Path("/test/{id}/{versionId}")
+	public List<PokedexEntry> getSpecies(@PathParam("id") int id, @PathParam("versionId") int versionId) {
+		return pokemonService.getPokedexEntries(id);
 	}
 }

@@ -4,10 +4,12 @@
 <configuration>
 	<typeAliases>
 		<!-- Everything that is not an Enum goes here -->
+		<typeAlias type="net.hurrr.pokedexee.model.PokedexEntry" alias="PokedexEntry"/>
 		<typeAlias type="net.hurrr.pokedexee.model.Pokemon" alias="Pokemon"/>
 		<typeAlias type="net.hurrr.pokedexee.model.Species" alias="Species"/>
 		<typeAlias type="net.hurrr.pokedexee.model.Text" alias="Text"/>
 		<typeAlias type="net.hurrr.pokedexee.model.TextEntry" alias="TextEntry"/>
+		<typeAlias type="java.util.HashMap" alias="HashMap"/>
 	</typeAliases>
 	<typeHandlers>
 		<!-- ... and every Enum we have should go in here -->
