@@ -67,4 +67,13 @@
 			JOIN versions v ON vg.pokedex_id = pdn.pokedex_id
 		WHERE pdn.species_id = #{id}
 	</select>
+	<select id="selectPokemonListEntries" parameterType="int" resultType="PokemonListEntry">
+		SELECT
+			pdn.species_id AS speciesId,
+			pdn.pokedex_number AS pokedexNumber,
+			ps.identifier AS identifier
+		FROM pokemon_dex_numbers pdn
+			JOIN pokemon_species ps ON pdn.species_id = ps.id
+		WHERE pdn.pokedex_id = #{id}
+	</select>
 </mapper>
