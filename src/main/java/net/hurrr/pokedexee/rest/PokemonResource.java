@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import net.hurrr.pokedexee.model.Pokedex;
@@ -25,29 +26,30 @@ public class PokemonResource {
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/")
 	public PokemonList getAllPokemon() {
 		return pokemonService.getPokemonList(Pokedex.NATIONAL);
 	}
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/{id}")
-	public Pokemon getPokemon(@PathParam("id") int pokemonId) {
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/{pokemonId}")
+	public Pokemon getPokemon(@PathParam("pokemonId") int pokemonId) {
 		return pokemonService.getPokemon(pokemonId);
 	}
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/species/{id}")
-	public Species getSpecies(@PathParam("id") int speciesId) {
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/species/{speciesId}")
+	public Species getSpecies(@PathParam("speciesId") int speciesId) {
 		return pokemonService.getSpecies(speciesId);
 	}
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/pokedex/{id}/{versionId}")
-	public List<PokedexEntry> getSpecies(@PathParam("id") int speciesId, @PathParam("versionId") int versionId) {
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/pokedex/{speciesId}")
+	public List<PokedexEntry> getSpecies(@PathParam("speciesId") int speciesId, @QueryParam("versionId") int versionId) {
 		return pokemonService.getPokedexEntries(speciesId);
 	}
 }

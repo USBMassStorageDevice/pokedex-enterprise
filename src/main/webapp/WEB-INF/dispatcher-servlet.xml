@@ -7,10 +7,16 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 		
     <context:annotation-config />
-    <mvc:annotation-driven />    
+    <mvc:annotation-driven />
+    
+	<!-- Static Content -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/favicon.ico" location="/resources/img/favicon.ico" />
+    
+    <!-- Controllers -->
+	<context:component-scan base-package="net.hurrr.pokedexee.controllers"/>    
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
 	        <property name="prefix" value="/WEB-INF/view/"/>
 	        <property name="suffix" value=".jsp"/>
 	</bean>
