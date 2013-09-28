@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import net.hurrr.pokedexee.model.Location;
 import net.hurrr.pokedexee.model.Pokedex;
 import net.hurrr.pokedexee.model.PokedexEntry;
 import net.hurrr.pokedexee.model.Pokemon;
@@ -51,5 +52,12 @@ public class PokemonResource {
 	@Path("/pokedex/{speciesId}")
 	public List<PokedexEntry> getSpecies(@PathParam("speciesId") int speciesId, @QueryParam("versionId") int versionId) {
 		return pokemonService.getPokedexEntries(speciesId);
+	}
+	
+	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/locations")
+	public List<Location> getAllLocations() {
+		return pokemonService.getAllLocations();
 	}
 }

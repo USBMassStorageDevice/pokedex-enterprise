@@ -1,9 +1,7 @@
 package net.hurrr.pokedexee.model;
 
 /**
- * Backed by the pokedexes.generation table. I don't agree with some of the canonical IDs, but whatever, trying to be consistent here.
- * @author myao
- *
+ * Backed by the pokedexes.generation table.
  */
 public enum Generation {
 	NULL(null, null),

@@ -2,6 +2,7 @@ package net.hurrr.pokedexee.services;
 
 import java.util.List;
 
+import net.hurrr.pokedexee.model.Location;
 import net.hurrr.pokedexee.model.Pokedex;
 import net.hurrr.pokedexee.model.PokedexEntry;
 import net.hurrr.pokedexee.model.Pokemon;
@@ -17,4 +18,6 @@ public interface PokemonService {
 	public List<PokedexEntry> getPokedexEntries(int id);
 	
 	public PokemonList getPokemonList(Pokedex pokedex);
+	
+	public List<Location> getAllLocations();
 }

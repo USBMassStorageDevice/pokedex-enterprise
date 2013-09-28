@@ -13,6 +13,12 @@
 		<association property="names" javaType="Text" column="id" select="selectSpeciesNames" columnPrefix="psn"/>
 	</resultMap>
 	
+	<resultMap type="Location" id="locationResult">
+		<id column="id" property="id"/>
+		<association property="location" javaType="Text" column="locationId" select="selectLocationNames" columnPrefix="ln"/>
+		<association property="locationArea" javaType="Text" column="id" select="selectLocationAreaNames" columnPrefix="lan"/>
+	</resultMap>
+	
 	<!-- Generic localized text mapper -->
 	<resultMap type="Text" id="textResult">
 		<collection property="entries" ofType="TextEntry" column="id">
@@ -20,6 +26,13 @@
 			<result property="string" column="text"/>
 		</collection>		
 	</resultMap>
+	<!-- Most of the text tables tend to follow this naming convention -->
+	<sql id="selectProseTableStuffFrom">
+		SELECT
+			local_language_id AS languageId,
+			name AS text
+		FROM <!-- whateverTable WHERE idColumnWeHave = #{id} -->
+	</sql>
 	
 	<!-- SQL Statements -->			
 	<select id="selectPokemon" parameterType="int" resultType="Pokemon" resultMap="pokemonResult">
@@ -51,11 +64,8 @@
 		WHERE ps.id = #{id}				
 	</select>	
 	<select id="selectSpeciesNames" parameterType="int" resultType="Text" resultMap="textResult">
-		SELECT
-			psn.local_language_id AS languageId,
-			psn.name AS text
-		FROM pokemon_species_names psn
-		WHERE psn.pokemon_species_id = #{id}
+		<include refid="selectProseTableStuffFrom"/> pokemon_species_names
+		WHERE pokemon_species_id = #{id}
 	</select>
 	<select id="selectPokedexEntries" parameterType="int" resultType="PokedexEntry">
 		SELECT
@@ -76,4 +86,26 @@
 			JOIN pokemon_species ps ON pdn.species_id = ps.id
 		WHERE pdn.pokedex_id = #{id}
 	</select>
+	<select id="selectLocation" parameterType="int" resultType="Location" resultMap="locationResult">
+		SELECT 
+			la.id AS id,
+			l.region_id AS region,
+			l.id AS locationId
+		FROM locations l
+			JOIN location_areas la ON la.location_id = l.id
+		<if test="id != null">
+		WHERE la.id = #{id}			
+		</if>		
+	</select>
+	<select id="selectLocationNames" parameterType="int" resultType="Text" resultMap="textResult">
+		<include refid="selectProseTableStuffFrom"/> location_names
+		WHERE location_id = #{id}
+	</select>
+	<select id="selectLocationAreaNames" parameterType="int" resultType="Text" resultMap="textResult">
+		<include refid="selectProseTableStuffFrom"/> location_area_prose
+		WHERE location_area_id = #{id}
+		AND name IS NOT NULL AND name &lt;&gt; ''
+	</select>
+	
+	
 </mapper>

@@ -4,13 +4,14 @@
 <configuration>
 	<typeAliases>
 		<!-- Everything that is not an Enum goes here -->
+		<typeAlias type="net.hurrr.pokedexee.model.Location" alias="Location"/>
 		<typeAlias type="net.hurrr.pokedexee.model.PokedexEntry" alias="PokedexEntry"/>
 		<typeAlias type="net.hurrr.pokedexee.model.Pokemon" alias="Pokemon"/>
 		<typeAlias type="net.hurrr.pokedexee.model.PokemonList" alias="PokemonList"/>
 		<typeAlias type="net.hurrr.pokedexee.model.PokemonListEntry" alias="PokemonListEntry"/>
 		<typeAlias type="net.hurrr.pokedexee.model.Species" alias="Species"/>
 		<typeAlias type="net.hurrr.pokedexee.model.Text" alias="Text"/>
-		<typeAlias type="net.hurrr.pokedexee.model.TextEntry" alias="TextEntry"/>
+		<typeAlias type="net.hurrr.pokedexee.model.TextEntry" alias="TextEntry"/>		
 		<typeAlias type="java.util.HashMap" alias="HashMap"/>
 	</typeAliases>
 	<typeHandlers>

@@ -25,10 +25,9 @@ public class HomeController {
 		model.addAttribute("endpoints", findPathAnnotationValues(PokemonResource.class));
 		return "index";
 	}
-	
-	@SuppressWarnings("rawtypes")
-	protected Map<String, String> findPathAnnotationValues(Class clazz) {
-		String prefix = "/rest/" + ((Path)clazz.getAnnotation(Path.class)).value();
+		
+	protected Map<String, String> findPathAnnotationValues(@SuppressWarnings("rawtypes") Class clazz) {
+		@SuppressWarnings("unchecked") String prefix = "/rest/" + ((Path)clazz.getAnnotation(Path.class)).value();
 		
 		Map<String, String> retVal = new HashMap<String, String>();
 		
@@ -39,5 +38,5 @@ public class HomeController {
 		}
 				
 		return retVal;
-	}
+	}	
 }
