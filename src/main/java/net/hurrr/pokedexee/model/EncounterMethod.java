@@ -4,7 +4,7 @@ package net.hurrr.pokedexee.model;
  * Backed by the encounter_methods table.
  */
 public enum EncounterMethod {
-	NULL(null),
+	NULL(0),
 	WALK(1),
 	OLD_ROD(6),
 	GOOD_ROD(7),
@@ -19,13 +19,13 @@ public enum EncounterMethod {
 	SUPER_ROD_SPOTS(9),
 	SURF_SPOTS(11);
 	
-	private final Integer sortOrder;
+	private final int sortOrder;
 	
-	private EncounterMethod(Integer sortOrder) {
+	private EncounterMethod(int sortOrder) {
 		this.sortOrder = sortOrder;
 	}
 
-	public Integer getSortOrder() {
+	public int getSortOrder() {
 		return sortOrder;
 	}
 }

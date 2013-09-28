@@ -4,6 +4,7 @@
 <configuration>
 	<typeAliases>
 		<!-- Everything that is not an Enum goes here -->
+		<typeAlias type="net.hurrr.pokedexee.model.Encounter" alias="Encounter"/>
 		<typeAlias type="net.hurrr.pokedexee.model.Location" alias="Location"/>
 		<typeAlias type="net.hurrr.pokedexee.model.PokedexEntry" alias="PokedexEntry"/>
 		<typeAlias type="net.hurrr.pokedexee.model.Pokemon" alias="Pokemon"/>
@@ -17,6 +18,8 @@
 	<typeHandlers>
 		<!-- ... and every Enum we have should go in here -->
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Color"/>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.EncounterCondition"/>
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.EncounterMethod"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.GameVersion"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.Generation"/>
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="net.hurrr.pokedexee.model.GrowthRate"/>

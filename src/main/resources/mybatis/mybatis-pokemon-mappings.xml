@@ -5,6 +5,7 @@
 	<resultMap type="Pokemon" id="pokemonResult">
 		<id column="id" property="id"/>
 		<association property="species" javaType="Species" column="speciesId" select="selectSpecies" columnPrefix="ps"/>
+		<collection property="encounters" ofType="Encounter" column="id" select="selectEncounters" columnPrefix="e"/>
 		<collection property="pokedexEntries" ofType="PokedexEntry" column="speciesId" select="selectPokedexEntries" columnPrefix="pdn"/>
 	</resultMap>
 	
@@ -17,6 +18,11 @@
 		<id column="id" property="id"/>
 		<association property="location" javaType="Text" column="locationId" select="selectLocationNames" columnPrefix="ln"/>
 		<association property="locationArea" javaType="Text" column="id" select="selectLocationAreaNames" columnPrefix="lan"/>
+	</resultMap>
+	
+	<resultMap type="Encounter" id="encounterResult">
+		<id column="id" property="id"/>
+		<association property="location" javaType="Location" column="locationAreaId" select="selectLocation" columnPrefix="l"/>
 	</resultMap>
 	
 	<!-- Generic localized text mapper -->
@@ -93,9 +99,7 @@
 			l.id AS locationId
 		FROM locations l
 			JOIN location_areas la ON la.location_id = l.id
-		<if test="id != null">
 		WHERE la.id = #{id}			
-		</if>		
 	</select>
 	<select id="selectLocationNames" parameterType="int" resultType="Text" resultMap="textResult">
 		<include refid="selectProseTableStuffFrom"/> location_names
@@ -106,6 +110,20 @@
 		WHERE location_area_id = #{id}
 		AND name IS NOT NULL AND name &lt;&gt; ''
 	</select>
-	
+	<select id="selectEncounters" parameterType="int" resultType="Encounter" resultMap="encounterResult">
+		SELECT
+			e.id AS id,
+			e.version_id AS gameVersion,
+			e.location_area_id AS locationAreaId,
+			e.min_level AS minLevel,
+			e.max_level AS maxLevel,
+			es.encounter_method_id AS encounterMethod,			
+			es.rarity AS rarity,
+			ecvm.encounter_condition_value_id AS encounterCondition
+		FROM encounters e
+			JOIN encounter_slots es ON es.id = e.encounter_slot_id
+			LEFT JOIN encounter_condition_value_map ecvm on ecvm.encounter_id = e.id
+		WHERE e.pokemon_id = #{id}
+	</select>
 	
 </mapper>

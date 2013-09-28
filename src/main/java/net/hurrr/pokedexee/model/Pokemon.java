@@ -26,6 +26,7 @@ public class Pokemon {
 	private boolean isDefault;
 
 	private Species species;
+	private List<Encounter> encounters;
 	private List<PokedexEntry> pokedexEntries;
 	
 	@XmlTransient // Database ID
@@ -84,6 +85,16 @@ public class Pokemon {
 
 	public void setSpecies(Species species) {
 		this.species = species;
+	}
+	
+	@XmlElementWrapper(name = "encounters")
+	@XmlElement(name = "encounter")
+	public List<Encounter> getEncounters() {
+		return encounters;
+	}
+	
+	public void setEncounters(List<Encounter> encounters) {
+		this.encounters = encounters;
 	}
 
 	@XmlElementWrapper(name = "pokedex")

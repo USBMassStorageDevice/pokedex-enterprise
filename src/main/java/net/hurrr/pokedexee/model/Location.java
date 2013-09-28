@@ -5,10 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Location {
-	protected int id;
-	protected Region region;
-	protected Text location;
-	protected Text locationArea;
+	private int id;
+	private Region region;
+	private Text location;
+	private Text locationArea; // TODO NULLABLE
 	
 	@XmlAttribute
 	public int getId() {
